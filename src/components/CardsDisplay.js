@@ -31,6 +31,10 @@ export default function CardsDisplay () {
     }
   };
 
+  const sendScore = () => {
+
+  };
+
   return (
     <div className="cards-display">
       <Card src={cards.chocobo.src} id={cards.chocobo.id} callbackFromParent={getClickedCard} />
