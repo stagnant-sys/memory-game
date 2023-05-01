@@ -2,37 +2,67 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { click } from "@testing-library/user-event/dist/click";
 
-export default function CardsDisplay () {
+export default function CardsDisplay ({getScore}) {
   const [cards, setCards] = useState(
     [
       {
-        id: 'tomberry',
+        id: "tomberry",
         src: "tomberry.jpg",
         },
       {
-        id: 'mog',
+        id: "mog",
         src: "mog.jpg",
       },
       {
-        id: 'chocobo',
+        id: "chocobo",
         src: "chocobo.jpg"
+      },
+      {
+        id: "pampa",
+        src: "pampa.jpg"
+      },
+      {
+        id: "ultros",
+        src: "ultros.jpg"
+      },
+      {
+        id: "shiva",
+        src: "shiva.jpg"
+      },
+      {
+        id: "ifrit",
+        src: "ifrit.jpg"
+      },
+      {
+        id: "marlboro",
+        src: "marlboro.jpg"
+      },
+      {
+        id: "whitemage",
+        src: "whitemage.jpg"
+      },
+      {
+        id: "blackmage",
+        src: "blackmage.jpg"
       }
     ]);
+
+  const [score, setScore] = useState(0);
 
   const [clickedCards, setClickedCards] = useState([]);
 
   const getClickedCard = (id) => {
     if (clickedCards.includes(id)) {
+      setScore(0);
+      setClickedCards([]);
       console.log('You lose');
     } else {
       setClickedCards([...clickedCards, id]);
       randomizeCards(cards);
-      // score +1
+      setScore(score + 1);
       console.log(`Add ${id} to clickedCards`);
     }
   };
-
-
 
   const randomizeCards = (array) => {
     let tempArray = [...array];
@@ -48,15 +78,21 @@ export default function CardsDisplay () {
       setCards(tempArray);
   };
 
+  const copyArray = cards.slice();
+  const cardsList = copyArray.map((el) => 
+    <Card 
+      key={el.id}
+      src={el.src} 
+      id={el.id} 
+      callbackFromParent={getClickedCard}
+    />
+    );
+
+
   return (
-    <div className="cards-display">
-      <Card src={cards[0].src} id={cards[0].id} callbackFromParent={getClickedCard} />
-      <Card src={cards[1].src} id={cards[1].id} callbackFromParent={getClickedCard} />
-      <Card src={cards[2].src} id={cards[2].id} callbackFromParent={getClickedCard} />
-
-      <ul>
-
-      </ul>
+  
+    <div className="cards-display" onClick={ getScore(score) }>
+      {cardsList}
     </div>
   );
 }

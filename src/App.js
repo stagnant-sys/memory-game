@@ -7,10 +7,16 @@ function App() {
   const [currScore, setCurrScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
+  const getScore = (score) => {
+    setCurrScore(score);
+    if (currScore >= bestScore) {
+      setBestScore(currScore);
+    }
+  };
 
   return (
     <div>
-      <CardsDisplay />
+      <CardsDisplay getScore={getScore} />
       <ScoreDisplay currScore={currScore} bestScore={bestScore} />
     </div>
   );
