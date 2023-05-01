@@ -44,6 +44,14 @@ export default function CardsDisplay ({getScore}) {
       {
         id: "blackmage",
         src: "blackmage.jpg"
+      },
+      {
+        id: "terra",
+        src: "terra.jpg"
+      },
+      {
+        id: "kefka",
+        src: "kefka.jpg"
       }
     ]);
 
